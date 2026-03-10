@@ -1,46 +1,42 @@
 package com.trainapp;
 /**
- * MAIN CLASS-UC5TrainApp
+ * MAIN CLASS-UC6TrainApp
  * 
- * UC5: Preserve Insertion Order of Bogies
+ * UC6: Map Bogie to Capacity (HashMap)
  * 
  * Description:
- * This class maintains the exact attachment order of bogies
- * while also preventing duplicate entries using LinkedHashSet.
+ * This class associates each bogie with its seating or
+ * load capacity using a key-value mapping structure.
  * 
  * At this stage, the application:
- * - Attaches bogies in order
- * - Preserves insertion in order
- * - Avoids duplicate bogies
- * - Displays final train structure
+ * - Creates a HashMap for bogie-capacity mapping
+ * - Inserts capacity values for each bogie
+ * - Iterates through map entries
+ * - Displays bogie and capacity information.
  * 
- * This maps ordered uniqueness using LinkedHashset.
+ * This maps lookup-based access using HashMap.
  * 
  * @author TulseeAgrawal
- * @version 5.0
+ * @version 6.0
  */
 import java.util.*;
 public class TrainApp {
 	public static void main(String[] args) {
-		System.out.println("==== UC5 - Preserve Insertion Order Of Bogies ====");
+		System.out.println("==== UC6 - Map Bogie to Capacity (HashMap) ====");
 		
-		// LinkedHashSet preserves order and ensures uniqueness
-		Set<String> formation = new LinkedHashSet<>();
+		Map<String,Integer> capacityMap= new HashMap<>();
 		
-		// Add bogies
-		formation.add("Engine");
-		formation.add("Sleeper");
-		formation.add("Cargo");
-		formation.add("Guard");
-		
-		// Duplicate entries
-		formation.add("Engine"); //duplicate
-		formation.add("Guard"); //duplicate
-		
-		System.out.println("\n Final Train Formation : \n"+formation);
-		
-		System.out.println("\n Note: \n LinkedHashSet preserves insertion order and removes duplicates automatically.");
-		System.out.println("\n UC5 formation setup completed...");
+		capacityMap.put("First Class",24);
+		capacityMap.put("Cargo",120);
+		capacityMap.put("Sleeper",72);
+		capacityMap.put("AC Chair",56);
+		System.out.println("\n Boogie Capacity Details : ");
+		for(Map.Entry<String, Integer> e : capacityMap.entrySet()) {
+			System.out.println(e.getKey()+" -> "+e.getValue());
+			
+		}
+
+		System.out.println("\n UC6 bogie-capacity mapping completed... ");
 		
 	}
 
