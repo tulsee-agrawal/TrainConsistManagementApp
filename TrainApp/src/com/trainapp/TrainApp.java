@@ -1,31 +1,30 @@
 package com.trainapp;
 /**
- * MAIN CLASS - UC8TrainApp
- * 
- * UC8 : Filter Passenger Bogies Using Streams
- * 
+ * MAIN CLASS - UC10TrainApp
+ *
+ * UC10 : Count Total Seats in Train
+ *
  * Description:
- * This class filters passenger bogies based on seating
- * capacity using the Java Stream API.
- * 
+ * This class aggregates seating capacity of all bogies
+ * into a single total using Stream reduce().
+ *
  * At this stage, the application:
- * - Creates a list of bogies
- * - Converts list into stream
- * - Applies filter condition
- * - Collects filtered result
- * - Displays qualifying bogies
- * 
- * This maps functional filtering using Streams.
- * 
+ * - Creates bogie list
+ * - Maps bogies to capacity
+ * - Reduces values into total
+ * - Displays total seat count
+ *
+ * This maps aggregation logic using reduce().
+ *
  * @author TulseeAgrawal
- * @version 8.0
+ * @version 10.0
  */
 import java.util.*;
 import java.util.stream.*;
 
 public class TrainApp {
 
-    // Reusing Bogie model from UC7
+    // Reusing Bogie model
     static class Bogie {
         String name;
         int capacity;
@@ -38,32 +37,29 @@ public class TrainApp {
 
     public static void main(String[] args) {
 
-        System.out.println("======UC8 - Filter Passenger Bogies Using Streams======");
+        System.out.println("====== UC10 - Count Total Seats in Train======");
+  
 
-        // Create list of passenger bogies
+        // Create list of bogies
         List<Bogie> bogies = new ArrayList<>();
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        bogies.add(new Bogie("Sleeper", 70));
 
-        // Print all bogies
-        System.out.println("\nAll Bogies:");
+        // Display bogies
+        System.out.println("\nBogies in Train:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // Filter bogies with capacity > 60
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        //use reduce() to calculate total
+        int totalCapacity = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, (a, b) -> a + b);
 
-        // Print filtered bogies
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (Bogie b : filteredBogies) {
-            System.out.println(b.name + " -> " + b.capacity);
-        }
+        System.out.println("\nTotal Seating Capacity of Train: " + totalCapacity);
 
-        System.out.println("\nUC8 filtering completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
