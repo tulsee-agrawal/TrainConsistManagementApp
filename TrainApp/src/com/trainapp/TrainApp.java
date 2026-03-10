@@ -1,31 +1,31 @@
 package com.trainapp;
 /**
- * MAIN CLASS - UC8TrainApp
- * 
- * UC8 : Filter Passenger Bogies Using Streams
- * 
+ * MAIN CLASS - UC9TrainApp
+ *
+ * UC9 : Group Bogies by Type (groupingBy)
+ *
  * Description:
- * This class filters passenger bogies based on seating
- * capacity using the Java Stream API.
- * 
+ * This class groups similar bogies together using
+ * Java Stream Collectors.groupingBy().
+ *
  * At this stage, the application:
  * - Creates a list of bogies
- * - Converts list into stream
- * - Applies filter condition
- * - Collects filtered result
- * - Displays qualifying bogies
- * 
- * This maps functional filtering using Streams.
- * 
+ * - Streams the list
+ * - Groups bogies by name
+ * - Stores grouped data in a Map
+ * - Displays grouped structure
+ *
+ * This maps classification logic using groupingBy.
+ *
  * @author TulseeAgrawal
- * @version 8.0
+ * @version 9.0
  */
 import java.util.*;
 import java.util.stream.*;
 
 public class TrainApp {
 
-    // Reusing Bogie model from UC7
+    // Reusing Bogie model from UC7/UC8
     static class Bogie {
         String name;
         int capacity;
@@ -38,32 +38,36 @@ public class TrainApp {
 
     public static void main(String[] args) {
 
-        System.out.println("======UC8 - Filter Passenger Bogies Using Streams======");
-
-        // Create list of passenger bogies
+        System.out.println("======UC9 - Group Bogies by Type====== ");
+        // Create list of bogies (includes repeated types)
         List<Bogie> bogies = new ArrayList<>();
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        bogies.add(new Bogie("Sleeper", 70));
+        bogies.add(new Bogie("AC Chair", 60));
 
-        // Print all bogies
+        // Display input bogies
         System.out.println("\nAll Bogies:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // Filter bogies with capacity > 60
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        // USING COLLECTORS.GROUPINGBY
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
 
-        // Print filtered bogies
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (Bogie b : filteredBogies) {
-            System.out.println(b.name + " -> " + b.capacity);
+        // Display grouped structure
+        System.out.println("\nGrouped Bogies:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            List<Bogie> list = entry.getValue();
+
+            System.out.println("\nBogie Type: " + entry.getKey());
+            for (Bogie b : list) {
+                System.out.println("  Capacity -> " + b.capacity);
+            }
         }
 
-        System.out.println("\nUC8 filtering completed...");
+        System.out.println("\nUC9 grouping completed...");
     }
 }
