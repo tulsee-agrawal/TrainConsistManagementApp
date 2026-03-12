@@ -1,70 +1,58 @@
 package com.trainapp;
 
-import java.util.Arrays;
-
 /**
- * MAIN CLASS - UC19TrainApp
+ * MAIN CLASS - UC20TrainApp
  *
- * Use Case 19: Binary Search for Bogie ID
+ * Use Case 20: Exception Handling During Search Operations
  *
  * Description:
- * This class demonstrates searching for a specific bogie ID
- * using the Binary Search algorithm on sorted data.
+ * Prevents searching when no bogies exist by applying
+ * fail-fast validation using a runtime exception.
  *
  * At this stage, the application:
- * - Creates sorted bogie ID array
- * - Defines search key
- * - Applies binary search logic
- * - Narrows search range each iteration
- * - Displays result
+ * - Creates bogie collection
+ * - Validates system state
+ * - Throws exception if empty
+ * - Stops invalid search operation
+ * - Displays meaningful message
  *
- * This maps optimized searching logic using divide-and-conquer.
+ * This maps defensive programming using runtime exceptions.
  *
  * @author TulseeAgrawal
- * @version 19.0
+ * @version 20.0
  */
 public class TrainApp {
 
     public static void main(String[] args) {
-      
-        System.out.println(" UC19 - Binary Search for Bogie ID");
-       
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        System.out.println(" UC20 - Exception Handling During Search");
 
-        Arrays.sort(bogieIds);
 
-        String key = "BG309";
+        String[] bogieIds = {};  //empty - failfast
 
-        System.out.println("Sorted Bogie IDs:");
-        for (String id : bogieIds) {
-            System.out.println(id);
+        // Search key
+        String searchId = "BG101";
+
+        // FAIL-FAST VALIDATION
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException("No bogies available in train. Cannot perform search.");
         }
-        System.out.println();
 
-        int left = 0;
-        int right = bogieIds.length - 1;
+        //SEARCH LOGIC 
         boolean found = false;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            int cmp = bogieIds[mid].compareTo(key);
-
-            if (cmp == 0) {
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
                 found = true;
-                break;               
-            } else if (cmp < 0) {
-                left = mid + 1;      
-            } else {
-                right = mid - 1;    
+                break;
             }
         }
 
+        
         if (found) {
-            System.out.println("Bogie " + key + " found using Binary Search.");
+            System.out.println("Bogie " + searchId + " found in train consist.");
         } else {
-            System.out.println("Bogie " + key + " not found using Binary Search.");
+            System.out.println("Bogie " + searchId + " not found in train consist.");
         }
 
-        System.out.println("\nUC19 search completed...");
+        System.out.println("\nUC20 execution completed...");
     }
 }
