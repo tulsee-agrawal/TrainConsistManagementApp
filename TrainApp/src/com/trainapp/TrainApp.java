@@ -1,59 +1,42 @@
 package com.trainapp;
 
+import java.util.Arrays;
+
 /**
- *
- * MAIN CLASS - UC16TrainApp
- *
- * Use Case 16: Sort Passenger Bogies by Capacity
+ * MAIN CLASS - UC17TrainApp
+ * 
+ * Use Case 17: Sort Bogie Names Using Arrays.sort()
  *
  * Description:
- * This class demonstrates manual sorting of passenger
- * bogie capacities using the Bubble Sort algorithm
- * instead of built-in sorting utilities.
+ * This class demonstrates sorting of bogie type names
+ * alphabetically using Java's built-in Arrays.sort() method.
  *
  * At this stage, the application:
- * - Creates an array of capacities
- * - Compares adjacent values
- * - Swaps values when required
- * - Repeats passes until sorted
- * - Displays sorted result
+ * - Creates an array of bogie names
+ * - Uses Arrays.sort() for sorting
+ * - Displays sorted results
  *
- * This maps algorithmic sorting logic using Bubble Sort.
+ * This maps optimized sorting using Java library utilities.
  *
  * @author TulseeAgrawal
- * @version 16.0
+ * @version 17.0
  */
 public class TrainApp {
 
     public static void main(String[] args) {
+        System.out.println(" UC17 - Sort Bogie Names Using Arrays.sort()");
 
-        System.out.println("======= UC16 - Manual Sorting using Bubble Sort========");
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
 
-       
-        int[] capacities = {72, 56, 24, 70, 60};
+        System.out.println("\nOriginal Bogie Names:");
+        System.out.println(Arrays.toString(bogieNames));
 
-        
-        System.out.println("\nOriginal Capacities:");
-        for (int c : capacities) {
-            System.out.print(c + " ");
-        }
-        System.out.println();
-        
-        for (int i = 0; i < capacities.length - 1; i++) {
-            for (int j = 0; j < capacities.length - 1 - i; j++) {
-                if (capacities[j] > capacities[j + 1]) {
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
-        
-        System.out.println("\nSorted Capacities (Ascending):");
-        for (int c : capacities) {
-            System.out.print(c + " ");
-        }
+        // Sort alphabetically
+        Arrays.sort(bogieNames);
 
-        System.out.println("\n\nUC16 sorting completed...");
+        System.out.println("\nSorted Bogie Names (Alphabetical):");
+        System.out.println(Arrays.toString(bogieNames));
+
+        System.out.println("\nUC17 sorting completed...");
     }
 }
